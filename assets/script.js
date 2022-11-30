@@ -2,9 +2,9 @@
 var generateBtn = document.querySelector("#generate");
 
 var characters =
-  'ABCDEFGHIJKLMNOPQRXTUVWXYZabcdefghijklmnopqrxtuvwxyz1234567890 !"#$%&()*+,-./:<>?={}[]^_`~|'; // True True
+  'ABCDEFGHIJKLMNOPQRXTUVWXYZabcdefghijklmnopqrxtuvwxyz1234567890!"#$%&()*+,-./:<>?={}[]^_`~|'; // True True
 var characters2 =
-  'abcdefghijklmnopqrxtuvwxyz1234567890 !"#$%&()*+,-./:<>?={}[]^_`~|'; // False True
+  'abcdefghijklmnopqrxtuvwxyz1234567890!"#$%&()*+,-./:<>?={}[]^_`~|'; // False True
 var characters3 =
   "ABCDEFGHIJKLMNOPQRXTUVWXYZabcdefghijklmnopqrxtuvwxyz1234567890"; //True False
 var characters4 = "abcdefghijklmnopqrxtuvwxyz1234567890"; // False False
@@ -18,7 +18,6 @@ function writePassword() {
   var checkedCapital = document.querySelector("#capitalLetters").checked;
   var checkedSpecial = document.querySelector("#specialCharacters").checked;
   var charactersTemp = "";
-  console.log(checkedCapital, checkedSpecial);
   function generatePassword() {
     if (checkedCapital === false && checkedSpecial === false) {
       charactersTemp = characters4;
