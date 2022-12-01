@@ -32,6 +32,11 @@ function numbersNotChecked() {
   characters = characters.replace("0", "");
 }
 
+// tests if the inputted value contains a non-number value
+function isNum(value) {
+  return /^\d+$/.test(value);
+}
+
 // Write password to the #password input
 function writePassword() {
   var passwordText = document.querySelector("#password");
@@ -53,8 +58,12 @@ function writePassword() {
     }
 
     var password2 = "";
-    if (passwordLength > 128 || passwordLength < 1) {
-      alert("Sorry, that password length is not valid. Please try again");
+    if (
+      passwordLength > 128 ||
+      passwordLength < 1 ||
+      isNum(passwordLength) === false
+    ) {
+      alert("Sorry, that is not a valid entry. Please try again");
     } else {
       for (let i = 0; i < passwordLength; i++) {
         password2 += characters.charAt(
@@ -64,6 +73,7 @@ function writePassword() {
       passwordText.value = `Your unique password is\n\n${password2}`;
     }
   }
+
   generatePassword();
   characters =
     'ABCDEFGHIJKLMNOPQRXTUVWXYZabcdefghijklmnopqrxtuvwxyz1234567890!#"$%&()*+,-./:<>?={}[]^_`~|';
