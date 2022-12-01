@@ -1,4 +1,4 @@
-# Homework task 3 building a password generator 
+# Homework task 3. Building a password generator. 
 Building a password generator
 
 Below is a Link and an image to my homework task 3, This Task required myself to build a password generating web application which would accept user input involving the password length, capital letters, special characters and numerical values. This was my first project using JavaScript and was my most enjoyable project to date!
