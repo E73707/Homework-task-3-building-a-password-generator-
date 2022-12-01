@@ -64,6 +64,8 @@ function writePassword() {
       isNum(passwordLength) === false
     ) {
       alert("Sorry, that is not a valid entry. Please try again");
+    } else if (characters === "abcdefghijklmnopqrxtuvwxyz") {
+      alert("Sorry, you must check at least one box below!!");
     } else {
       for (let i = 0; i < passwordLength; i++) {
         password2 += characters.charAt(
