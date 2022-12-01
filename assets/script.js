@@ -2,51 +2,82 @@
 var generateBtn = document.querySelector("#generate");
 
 var characters =
-  'ABCDEFGHIJKLMNOPQRXTUVWXYZabcdefghijklmnopqrxtuvwxyz1234567890!"#$%&()*+,-./:<>?={}[]^_`~|'; // True True
-var characters2 =
-  'abcdefghijklmnopqrxtuvwxyz1234567890!"#$%&()*+,-./:<>?={}[]^_`~|'; // False True
-var characters3 =
-  "ABCDEFGHIJKLMNOPQRXTUVWXYZabcdefghijklmnopqrxtuvwxyz1234567890"; //True False
-var characters4 = "abcdefghijklmnopqrxtuvwxyz1234567890"; // False False
+  'ABCDEFGHIJKLMNOPQRXTUVWXYZabcdefghijklmnopqrxtuvwxyz1234567890!#"$%&()*+,-./:<>?={}[]^_`~|'; // True True True
+
+// function deletes all capital letters from string of characters
+function capNotChecked() {
+  let characters2 = characters.slice(
+    characters.indexOf("A", 0),
+    characters.indexOf("a", 0)
+  );
+  characters = characters.replace(characters2, "");
+}
+
+//function deletes all special characters from string
+function specialNotChecked() {
+  let characters2 = characters.slice(
+    characters.indexOf("!", 0),
+    characters.length
+  );
+  characters = characters.replace(characters2, "");
+}
+
+// function deletes all numbers from string
+function numbersNotChecked() {
+  let characters2 = characters.slice(
+    characters.indexOf("1", 0),
+    characters.indexOf("!", 0)
+  );
+  characters = characters.replace(characters2, "");
+  characters = characters.replace("0", "");
+}
+
+// tests if the inputted value contains a non-number value
+function isNum(value) {
+  return /^\d+$/.test(value);
+}
 
 // Write password to the #password input
 function writePassword() {
   var passwordText = document.querySelector("#password");
   var passwordLen = document.querySelector("#passwordLen");
   var passwordLength = passwordLen.value;
-  //   var capitalLetters = ;
   var checkedCapital = document.querySelector("#capitalLetters").checked;
   var checkedSpecial = document.querySelector("#specialCharacters").checked;
-  var charactersTemp = "";
+  var checkedNumbers = document.querySelector("#numbers").checked;
+
   function generatePassword() {
-    if (checkedCapital === false && checkedSpecial === false) {
-      charactersTemp = characters4;
-    } else if (checkedCapital === false && checkedSpecial === true) {
-      charactersTemp = characters2;
-    } else if (checkedCapital === true && checkedSpecial === false) {
-      charactersTemp = characters3;
-    } else {
-      charactersTemp = characters;
+    if (checkedCapital === false) {
+      capNotChecked();
     }
+    if (checkedSpecial === false) {
+      specialNotChecked();
+    }
+    if (checkedNumbers === false) {
+      numbersNotChecked();
+    }
+
     var password2 = "";
-    if (passwordLength > 128 || passwordLength < 1) {
-      alert("Sorry, that password length is not valid. Please try again");
+    if (
+      passwordLength > 128 ||
+      passwordLength < 1 ||
+      isNum(passwordLength) === false
+    ) {
+      alert("Sorry, that is not a valid entry. Please try again");
     } else {
       for (let i = 0; i < passwordLength; i++) {
-        password2 += charactersTemp.charAt(
-          Math.floor(Math.random() * charactersTemp.length)
+        password2 += characters.charAt(
+          Math.floor(Math.random() * characters.length)
         );
       }
-      passwordText.value = `Your unique password is ${password2}`;
+      passwordText.value = `Your unique password is\n\n${password2}`;
     }
-    // capitalLetters = capitalLetters.value;
-    // console.log(capitalLetters);
   }
+
   generatePassword();
+  characters =
+    'ABCDEFGHIJKLMNOPQRXTUVWXYZabcdefghijklmnopqrxtuvwxyz1234567890!#"$%&()*+,-./:<>?={}[]^_`~|';
 }
 
-if (document.querySelector("#capitalLetters").checked === true) {
-  console.log("Checked");
-}
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
